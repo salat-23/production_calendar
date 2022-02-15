@@ -3,6 +3,9 @@ package com.example.demo.service;
 
 import com.example.demo.component.CSVParser;
 import com.example.demo.component.CSVParserV1;
+import com.example.demo.model.Day;
+import com.example.demo.model.Month;
+import com.example.demo.model.Year;
 import com.example.demo.repository.DayRepository;
 import com.example.demo.repository.MonthRepository;
 import com.example.demo.repository.YearRepository;
@@ -11,7 +14,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 @Service
 public class ParserService {
@@ -48,12 +54,14 @@ public class ParserService {
                     e.printStackTrace();
                 }
             }
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+  /*  private Set<Day> parseDays(List<String> formattedDays, Month month, Year year) {
+
+    }*/
 
 
 }

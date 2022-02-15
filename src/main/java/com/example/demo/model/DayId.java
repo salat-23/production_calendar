@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import lombok.Data;
 import org.hibernate.Hibernate;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.ManyToOne;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Data
 @Embeddable
 public class DayId implements Serializable {
 

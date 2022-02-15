@@ -17,9 +17,9 @@ public class Day {
     @EmbeddedId
     private DayId dayId;
 
-    @ManyToOne
-    @JoinColumn(name = "day_type_type")
-    private DayType dayType;
+    @Column(name = "day_type")
+    @Enumerated(EnumType.STRING)
+    private EDayType dayType;
 
     @Override
     public boolean equals(Object o) {

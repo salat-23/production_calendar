@@ -32,16 +32,13 @@
 
 
         <createTable tableName="calendar_month">
-            <column name="id" type="bigint">
-                <constraints primaryKey="true" nullable="false"/>
-            </column>
 
             <column name="calendar_year" type="bigint">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             
             <column name="month_name" type="varchar">
-                <constraints nullable="false"/>
+                <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="month_number" type="int">
                 <constraints nullable="false"/>
@@ -52,37 +49,28 @@
                                  referencedTableName="calendar"
                                  referencedColumnNames="year"/>
         
-        
+        <addUniqueConstraint tableName="calendar_month" columnNames="calendar_year,month_number"/>
         
         
         
         <createTable tableName="calendar_day">
-            <column name="calendar_month_id" type="bigint"/>
+            <column name="calendar_month_year" type="bigint"/>
+            <column name="calendar_month_number" type="bigint"/>
             <column name="number" type="int">
                 <constraints nullable="false"/>
             </column>
-            <column name="day_type_type" type="varchar">
+            <column name="day_type" type="varchar">
                 <constraints nullable="false"/>
             </column>
         </createTable>
         
-        <addPrimaryKey tableName="calendar_day" columnNames="calendar_month_id, number"/>
+        <addPrimaryKey tableName="calendar_day" columnNames="calendar_month_year, calendar_month_number, number"/>
 
-        <addForeignKeyConstraint baseTableName="calendar_day" baseColumnNames="calendar_month_id"
+        <addForeignKeyConstraint baseTableName="calendar_day" baseColumnNames="calendar_month_year,calendar_month_number"
                                  constraintName="FK_calendar_day_calendar_month"
                                  referencedTableName="calendar_month"
-                                 referencedColumnNames="id"/>
-        
-        
-        <createTable tableName="day_type">
-            <column name="type" type="varchar">
-                <constraints primaryKey="true" unique="true"/>
-            </column>
-        </createTable>
+                                 referencedColumnNames="calendar_year,month_number"/>
 
-        <addForeignKeyConstraint baseTableName="calendar_day" baseColumnNames="day_type_type" constraintName="FK_calendar_day_day_type"
-                                 referencedTableName="day_type"
-                                 referencedColumnNames="type"/>
         
         
     </changeSet>

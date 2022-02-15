@@ -14,16 +14,8 @@ import java.util.Objects;
 @Table(name = "calendar_month")
 public class Month {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "calendar_year")
-    private Year year;
-
-    @Column(name = "month_name")
-    private String name;
+    @EmbeddedId
+    private MonthId monthId;
 
     @Column(name = "month_number")
     private Integer number;
@@ -33,7 +25,7 @@ public class Month {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
         Month month = (Month) o;
-        return id != null && Objects.equals(id, month.id);
+        return monthId != null && Objects.equals(monthId, month.monthId);
     }
 
     @Override
