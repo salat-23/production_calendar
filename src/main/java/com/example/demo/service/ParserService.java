@@ -3,7 +3,11 @@ package com.example.demo.service;
 
 import com.example.demo.component.CSVParser;
 import com.example.demo.component.CSVParserV1;
+import com.example.demo.repository.DayRepository;
+import com.example.demo.repository.MonthRepository;
+import com.example.demo.repository.YearRepository;
 import com.opencsv.exceptions.CsvValidationException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -13,12 +17,22 @@ import java.util.Arrays;
 public class ParserService {
 
 
-    private CSVParser parser;
-    private DownloadResourceService downloadResourceService;
+    private final CSVParser parser;
+    private final DownloadResourceService downloadResourceService;
+    private final YearRepository yearRepository;
+    private final MonthRepository monthRepository;
+    private final DayRepository dayRepository;
 
-    public ParserService(DownloadResourceService downloadResourceService) {
+    public ParserService(DownloadResourceService downloadResourceService,
+                         YearRepository yearRepository,
+                         MonthRepository monthRepository,
+                         DayRepository dayRepository,
+                         CSVParser parser) {
         this.downloadResourceService = downloadResourceService;
-        parser = new CSVParserV1();
+        this.yearRepository = yearRepository;
+        this.monthRepository = monthRepository;
+        this.dayRepository = dayRepository;
+        this.parser = parser;
     }
 
     public void parseAndSave() {

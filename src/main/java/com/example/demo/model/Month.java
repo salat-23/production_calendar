@@ -1,7 +1,15 @@
 package com.example.demo.model;
 
-import javax.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "calendar_month")
 public class Month {
@@ -20,4 +28,16 @@ public class Month {
     @Column(name = "month_number")
     private Integer number;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Month month = (Month) o;
+        return id != null && Objects.equals(id, month.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

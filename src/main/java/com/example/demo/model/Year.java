@@ -1,7 +1,15 @@
 package com.example.demo.model;
 
-import javax.persistence.*;
+import lombok.*;
+import org.hibernate.Hibernate;
 
+import javax.persistence.*;
+import java.util.Objects;
+
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
 @Entity
 @Table(name = "calendar")
 public class Year {
@@ -21,4 +29,16 @@ public class Year {
     @Column(name = "total_working_days_24_hours_week")
     private Integer totalWorking24hoursDays;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
+        Year year1 = (Year) o;
+        return year != null && Objects.equals(year, year1.year);
+    }
+
+    @Override
+    public int hashCode() {
+        return getClass().hashCode();
+    }
 }

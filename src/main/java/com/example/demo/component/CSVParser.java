@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.List;
 
-@Component
+
 public interface CSVParser {
 
     String[] getNextLine() throws CsvValidationException, IOException;
