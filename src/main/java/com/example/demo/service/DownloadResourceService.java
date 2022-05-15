@@ -29,7 +29,6 @@ public class DownloadResourceService {
         this.documentStoragePath = storageComponent.getStorageLocation();
     }
 
-
     public String getLatestFileURL() {
         try {
             HttpClient client = HttpClient.newHttpClient();
